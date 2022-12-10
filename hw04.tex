@@ -1,0 +1,112 @@
+\chapter{Меры опасности. Порядки на случайных величинах.}
+    \problem{}
+        Пусть $f_X(x) = \exp\{ - |x/\theta | \}/2\theta$ для $-\infty < x < \infty$, $\theta>0$. Найти распределение $Y=e^X$.
+
+        \solution{}
+            $\P(Y < 0) = 0$. Пусть $x>0$. Тогда 
+            \begin{equation*}
+                \P (Y \leq x) =  \P ( X \leq \ln x) \quad \implies \quad f_Y(x) = f_X(\ln x)/x \1(x>0). 
+            \end{equation*}
+            Значит $f_Y(x) = \exp \{-|\ln x /\theta |  \}/( 2\theta x) \cdot \1(x>0)$, где  $\1(x \in A)$ - индикаторная функция множества $A$, а функция распределения имеет следующий вид:
+            \begin{equation*}
+                F_X(x) = \frac{x^{1/\theta}}{2}  \1(0<x<1) + (1 - \frac{x^{-1/\theta}}{2}) \1(x\geq 1).
+            \end{equation*}
+    
+    \problem{}
+        Будет ли свертка составных пуассоновских распределений также составным пуассоновским распределением?
+        \solution{}
+            Пусть $\widetilde N_1$ и $\widetilde N_2$ - независимые составные пуассоновские распределения. Тогда их производящие функции имеют следующий вид: $P_{\widetilde N_i}(z) = \exp \{ \lambda_i (P_i(z) -1 ) \}, \quad i=1,2 $. Тогда
+            \begin{equation*}
+                P_{\widetilde N_1 + \widetilde N_2}(z) = P_{\widetilde N_1}(z) \cdot P_{\widetilde N_2}(z) = \exp \{\lambda_1 (P_1 (z) -1) + \lambda_2 (P_2(z) - 1) \}.
+            \end{equation*}
+            Чтобы получившееся распределение было составным пуассоновским необходимо и достаточно чтобы 
+            \begin{equation*}
+                \lambda_1 (P_1 (z) -1) + \lambda_2 (P_2(z) - 1) = \lambda ( P(z) - 1),
+            \end{equation*}
+            для некоторой MGF $P(z)$ и некоторого $\lambda>0$. Пусть $P_i(z) = \sum_{k=0}^\infty p_k^i z^k$, $P(z) = \sum_{k=0}^\infty p_k z^k$. Тогда
+            \begin{equation} \label{system}
+                \left\{\begin{aligned}
+                    &\lambda_1p_k^1 + \lambda_2p_k^2 - \lambda p_k = 0,\qquad k=1,2,\dots \\
+                    &\lambda_1p_0^1 + \lambda_2 p_0^2 - \lambda p_0 = \lambda_1 + \lambda_2 - \lambda\\
+                    &p_k \geq 0, \quad k = 0,1,2 \dots\\
+                    &\sum _{k=0}^\infty p_k = 1\\
+                    &\lambda > 0
+                \end{aligned}\right.
+            \end{equation}
+            откуда находим 
+            \begin{equation*}
+                \left\{\begin{aligned}
+                    &p_k = \frac{\lambda_1p_k^1 + \lambda_2p_k^2}{\lambda}, \quad k = 1, 2, \dots\\
+                    &\lambda = \frac{\lambda_1(1 - p_0^1) + \lambda_2 ( 1 - p_0^2)}{1 - p_0}.
+                \end{aligned}\right.
+            \end{equation*}
+            Откуда видно, что $\lambda > 0$, если $p_0^1 < 1$ или $p_0^2 < 1$. В этом случае и все $p_k \geq 0$. Осталось проверить условие, что $\sum _{k=0}^\infty p_k = 1$. 
+            \begin{equation*}
+                \sum _{k=0}^\infty p_k = p_0 + \sum _{k=1}^\infty p_k = p_0 + \frac1\lambda \sum _{k=1}^\infty \left( \lambda_1 p_k^1 + \lambda_2 p_k^2 \right) = p_0 + \frac{\lambda_1 (1 - p_0^1) + \lambda_2 ( 1 - p_0^2)}{\frac{\lambda_1(1 - p_0^1) + \lambda_2 ( 1 - p_0^2)}{1 - p_0}} = 1.
+            \end{equation*}
+            Итак, зафиксировав $p_0 < 1$ мы однозначно найдем производящую функцию $P(z)$ и $\lambda>0$ из системы \eqref{system}, если $p_0^1<1$ и  $p_0^2 < 1$. Если же $p_0^1=p_0^2 = 1$, то подойдет $P(z) = 1$ и произвольное $\lambda > 0$. В любом случае, получаемя, что свертка составных пуассоновских распределений есть составное пуассоновское распределение.
+
+    \problem{}
+        Проверить, что отрицательное биномиальное распределение - это пуассоновско-логарифмическое распределение. 
+        \solution{}
+            Логарифмическое распределение определяется следующим образом
+            \begin{equation*}
+                p_k = \frac{\frac{\beta^k}{(1+\beta)^k}}{k\ln(1 + \beta)}, \quad k=1,2,\ldots.
+            \end{equation*}
+            Найдем производящую функцию логарифмического распределения. Пусть $z\leq 1$. Тогда
+            \begin{align*}
+                &\sum\limits_{k=1}^\infty p_k = \sum\limits_{k=1}^\infty \frac{\frac{\beta^k}{(1+\beta)^k}}{k\ln(1 + \beta)}z^k = \frac{\beta}{(1+\beta)\ln(1 + \beta)} \int\limits_0^z 
+                \sum\limits_{k=0}^\infty \left( \frac{\xi \beta}{1 + \beta} \right)^k d\xi= \\
+                &= \frac{\beta}{(1+\beta)\ln(1 + \beta)} \int\limits_0^z \frac1{1 - \frac{\xi \beta}{1 + \beta}} d\xi
+                = -\frac{\ln(1 - \frac{z \beta}{1 + \beta} )}{\ln(1+\beta)}.
+            \end{align*}
+            Тогда производящая функция пуассоновско-логарифмического распределения выглядит следующим образом:
+            \begin{equation*}
+                \exp\left\{ \lambda\left(-\frac{\ln(1 - \frac{z \beta}{1 + \beta} )}{\ln(1+\beta)} - 1\right) \right\} =  \exp\left\{ \lambda\left(-\frac{\ln(1 + \beta - z \beta )}{\ln(1+\beta)}\right) \right\} = \left(1 + \beta - z \beta \right)^{-\frac{\lambda}{\ln(1 + \beta)}}.
+            \end{equation*}
+            Производящая функция отрицательного биномиального распределения $NB(a,b)$ имеет следующий вид:
+            \begin{equation*}
+                (1+b+bz)^{-a}.
+            \end{equation*}
+            Положив $\beta = b, \lambda = a\ln(1+b)$ получаем, что отрицательное биномиальное распределение является пуассоновско-логарифмическим.
+    
+    \problem{}
+        Показать, что для составного пуассоновского распределения 
+        \begin{equation*}
+            g_n = \frac{\lambda}{n}\sum\limits_{j=1}^n jf_jg_{n-j}.
+        \end{equation*}
+        \solution{}
+            Пуассоновское распределение $Pois(\lambda)$ принадлежит классу $(a, b, 0)$ с $a=0, b=\lambda, p_0 = e^{-\lambda}$. Пусть вторичное распределение задано $\{f_k \}_{k=0}^\infty$. Тогда по теореме Панджера имеем
+            \begin{equation*}
+                g_n = \frac1{1 - af_0} \sum\limits_{j=1}^n ( a + \frac{bj}n)f_j g_{n-j} = \frac{\lambda}{n} \sum\limits_{j=1}^n jf_j g_{n-j}.
+            \end{equation*}
+    
+    \problem{}
+    Если первичное распределение принадлежит классу $(a,b,1)$, то справедливо соотношение:
+    $$g_n =\frac{[p_1 - (a + b)p_0]f_n +\sum^n_{j=1}\left(a + \frac{bj}{n}\right)f_j g_{n-j}}{1 - af_0}.$$
+        
+        \solution{}
+            Рассуждения аналогичные доказательству теоремы Панджера. А именно: перепишем рекурентное соотношение в виде 
+            \begin{equation*}
+                kp_k = a(k-1)p_{k-1} + (a+b)p_{k-1} ,\quad k=2,3,\ldots .
+            \end{equation*}
+            Умножим обе части это равенства на $[P_2(z)]^{k-1}P^\prime_2(z)$ и просуммируем по $k$ начная с $k=2$:
+            \begin{equation} \label{eq5_1}
+            \sum\limits_{k=2}^\infty kp_k[P_2(z)]^{k-1}P^\prime_2(z) = a \sum\limits_{k=2}^\infty (k-1)p_{k-1}[P_2(z)]^{k-1}P^\prime_2(z) + (a+b)\sum\limits_{k=2}^\infty p_{k-1}[P_2(z)]^{k-1}P^\prime_2(z).
+            \end{equation}
+            Учитывая, что $P(z)=P_1(P_2(z)) = \sum\limits_{k=0}^\infty p_k[P_2(z)]^k$, получаем, что \ref{eq5_1} переписывается в виде:
+            \begin{equation*}
+                P^\prime(z) - p_1P^\prime_2(z) = aP_2(z)P^\prime(z) + (a+b)\left[P(z)P^\prime_2(z) - p_0P^\prime_2(z) \right].
+            \end{equation*}
+            Раскладывая левую и правую части в ряд и приравнивая коэффициенты при $z^{n-1}$ получаем:
+            \begin{equation*}
+                ng_n - np_1f_n = a \sum_{j=0}^n(n-j)f_jg_{n-j} + (a+b)\left[ \sum_{j=0}^njf_jg_{n-j} - np_0f_n\right].
+            \end{equation*}
+            Перенося в левую часть все слагаемы связаные с $g_n$ и группируя остальные получаем :
+            \begin{equation*}
+                g_n(n -anf_0) = nf_n[p_1 - (a+b)p_0 ] +  \sum_{j=1}^n(an + bj)f_jg_{n-j}.
+            \end{equation*}
+            Разделив обе части на $(n -anf_0)$ окончательно получаем:
+            \begin{equation*}
+                g_n =\frac{[p_1 - (a + b)p_0]f_n +\sum^n_{j=1}\left(a + \frac{bj}{n}\right)f_j g_{n-j}}{1 - af_0}.
+            \end{equation*}

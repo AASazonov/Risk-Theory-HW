@@ -1,0 +1,127 @@
+\chapter{Модели индивидуального и коллективного риска, распределения убытков и их числа, классы Панджера, составные считающие распределения}
+    \problem{}
+        Проверить, что геометрическое распределение с $p_k = \P(X=k) = pq^k$, $k = 0, 1, \dots$ 
+        обладает отсутствием памяти, т.е. 
+        \begin{equation*}
+            \P(X \geq k+l \vert X \geq k) = \P(X \geq l).
+        \end{equation*}
+    \solution{}
+        \begin{multline*}
+            \P(X \geq k+l \vert X \geq k) =\\= \frac{\P(X \geq k+l, X \geq k)}{\P(X \geq k)} = \frac{\P(X \geq k+l)}{\P(X \geq k)} = \\ =
+            \frac{\sum _{n\geq k+l}pq^{n}}{\sum _{n\geq k}pq^{n}} = \frac{\sum _{n\geq k+l}q^{n}}{\sum _{n\geq k}q^{n}} = 
+            \frac{\frac{q^{k+l}}{1-q}}{\frac{q^{k}}{1-q}} = q^l =\\= \frac{1-q}{1-q}q^l = \underbrace{(1-q)}_{=p} \frac{q^l}{1-q} = \sum_{n\geq l} pq^n = \P(X\geq l).
+        \end{multline*}
+    \problem{}
+        Проверить, что производящая функция моментов случайной величины $S^{col} = \sum_{i=1}^{N} X_i$, где $N$ -- целочисленная случайная величина, не зависящая от последовательности н.о.р. случайных величин $(X_i)_{i \geq 1}$, записывается следующим образом:
+        \begin{equation*}
+            g_{S^{col}}(t) = \E \left[e^{tS^{col}}\right] = P_N(g_X(t)),
+        \end{equation*}
+        где $P_N(z) = \E \left[z^N\right]$ -- производящая функция $N$, а $g_X(t) = \E \left[e^{tX_i}\right]$ -- производящая функция моментов случайных величин $X_i$. Найти математическое ожидание и дисперсию величины $S^{col}$.
+    \solution{}
+        \begin{multline*}
+            \E \left[e^{tS^{col}}\right] = \E \left[e^{t\sum_{i=1}^{N} X_i}\right] = \E \left[\left.\E\left[ e^{t\sum_{i=1}^{N} X_i}\right| N=n\right]_{n=N}\right] = \\ =
+            \E \left[\E\left[ e^{t\sum_{i=1}^{n} X_i}\right]_{n=N}\right] = \E \left[\E\left[ e^{tX_i}\right]^n_{n=N}\right] = 
+            \E \left[ \E[e^{tX_i}]^N\right] = P_N(g_X(t))
+        \end{multline*}
+        Из курса теории вероятностей знаем, что есть формула для моментов случайной величины, выраженных через производные производящей функции моментов:
+        \begin{equation*}
+            \E\left[(S^{col})^n\right] = \left.\frac{d^n \MGF_{S^{col}} (t)}{dt^n}\right|_{t=0+}
+        \end{equation*}
+        Итого имеем:
+        \begin{align*}
+            \E\left[S^{col}\right]     &= P_N'(g_X(0)) g_X'(0) =  P_N'(1) \E\left[X\right], \\ \\
+            \E\left[(S^{col})^2\right] &= P_N''(g_X(0))\cdot (g_X'(0))^2 + P_N'(g_X(0))\cdot g_X''(0) =\\
+                                       &= P_N''(1)\cdot (\E\left[X\right])^2 + P_N'(1)\var X, \\ \\
+            \var S^{col}               &= P_N''(1)\cdot (\E\left[X\right])^2 + P_N'(1)\var X - \left(P_N'(1) \E\left[X\right]\right)^2 = \\ 
+                                       &= \left(P_N''(1) - P_N'(1)^2\right)\E\left[X\right]^2 + P_N'(1)\var X.
+        \end{align*}
+    \problem{}
+        Коэффициент изменчивости случайной величины $X$ равен $\cv X = \frac{\std X}{\E\left[X\right]}$. Пусть
+        \begin{align*}
+            S_1^{col} &= \sum_{i=1}^{N_1} Y_i, \\
+            S_2^{col} &= \sum_{i=1}^{N_2} Z_i,
+        \end{align*}
+        где $N_1 \sim NB(10, 0.9)$, $N_2 \sim NB(1, 0.1)$, i.i.d. $Y_i \sim Exp (a)$, i.i.d. $Z_i \sim Par(x_0, 9/4)$. Найти коэффициенты изменчивости для $N_1$, $N_2$, $Y$, $Z$, $S_1$, $S_2$.
+        Используемые обозначения:
+        \begin{itemize}
+            \item Отрицательное биномиальное распределение с параметрами $m$ и $p$:
+                \begin{equation*}
+                    N \sim NB(m, p) \iffdef \P(N = k) = C_{m+k-1}^{k}p^m(1-p)^k;
+                \end{equation*}
+            \item Показательное распределение с параметром $a$:
+                \begin{equation*}
+                    Y \sim Exp(a) \iffdef p_Y(x) = ae^{-ax}\1(x \geq 0);
+                \end{equation*}
+            \item Распределение Парето с параметрами $x_0$ и $d$:
+                \begin{equation*}
+                        Z \sim Par(x_0, d) \iffdef P(Z > x) = \left(\frac{x_0}{x}\right)^d\1(x > x_0).
+                \end{equation*}
+        \end{itemize}
+    \solution{}
+        \partsol{}
+            Найдем коэффициент изменчивости для $N\sim NB(m, p)$.
+            \begin{equation*}
+                \left. \begin{aligned}
+                    \E \left[N\right] &= \frac{pm}{1-p} & \\
+                    \var N            &= \frac{pm}{(1-p)^2} 
+                \end{aligned} \right\} \implies \cv N = \frac{\sqrt{\frac{pm}{(1-p)^2} }}{\frac{pm}{1-p}} = \frac{1}{\sqrt{pm}}.
+            \end{equation*}
+            В частных случаях:
+            \begin{itemize}
+                \item $(m, p) = (10, 0.9)\colon\quad \cv N_1 = \frac{1}{3}$,
+                \item $(m, p) = (1, 0.1)\colon\quad\ \ \cv N_2 = 1$.
+            \end{itemize}
+        \partsol{}
+            Найдем коэффициент изменчивости для $Y\sim Exp(a)$.
+            \begin{equation*}
+                \left. \begin{aligned}
+                    \E \left[Y\right] &= \frac{1}{a} & \\
+                    \var Y            &= \frac{1}{a^2} 
+                \end{aligned} \right\} \implies \cv Y = \frac{\sqrt{\frac{1}{a^2}}}{\frac{1}{a}} \equiv 1.
+            \end{equation*}
+        \partsol{}
+            $\cv S_1^{col}$ будем считать используя задачу 4. Условная плотность суммы:
+            \begin{equation*}
+                p_S(x|N) = \frac{a^N x^{N-1}}{\Gamma(N)}e^{-ax}\1(x\geq 0).
+            \end{equation*}
+            \begin{multline*}
+                \E\left[S_1^{col}|N\right] = \int_{0}^{\infty} x\frac{a^N x^{N-1}}{\Gamma(N)}e^{-ax}dx = 
+                \frac{1}{a\Gamma(N)} \int_{0}^{\infty} (ax)^{N}e^{-ax}d(ax) =\\= \frac{1}{a\Gamma(N)} \int_{0}^{\infty} y^{(N+1)-1}e^{-y}dy = \frac{\Gamma(N+1)}{a\Gamma(N)} = \frac{N}{a}
+            \end{multline*}
+            \begin{multline*}
+                \E\left[(S_1^{col})^2|N\right] = \int_{0}^{\infty} x^2\frac{a^N x^{N-1}}{\Gamma(N)}e^{-ax}dx = \frac{1}{a\Gamma(N)} \int_{0}^{\infty} (ax)^{N+1}e^{-ax}dx =\\=
+                \frac{1}{a^2\Gamma(N)} \int_{0}^{\infty} y^{(N+2)-1}e^{-y}dy = \frac{\Gamma(N+2)}{a^2\Gamma(N)} =\frac{N(N+1)}{a^2}
+            \end{multline*}
+            \begin{equation*}
+                \var\left[S_1^{col}|N\right] = \frac{N(N+1)}{a^2} - \left(\frac{N}{a}\right)^2 = \frac{N}{a^2}
+            \end{equation*}
+            Итого,
+            \begin{align*}
+                \E\left[S_1^{col}\right] &= \E\left[\E\left[S_1^{col}|N\right]\right] = \E\left[\frac{N}{a}\right] = \frac{\frac{10\cdot 0.9}{1-0.9}}{a} = \frac{90}{a}, \\
+                \var S_1^{col}           &= \E\left[\var\left[S_1^{col}|N\right]\right] = \frac{\frac{10\cdot 0.9}{1-0.9}}{a^2} = \frac{90}{a^2}, \\
+                \cv S_1^{col}            &= \frac{\sqrt{10}}{30}.
+            \end{align*}
+        \partsol{}
+            Тут посчитаем проще: $N = \sum_{k\in\mathbb{Z}}k\1(N=k)$, 
+            \begin{align*}
+                \E\left[S_2^{col}\right] &= \sum_{k\in \mathbb{N}\cup\{0\}}\left(C_{m+k-1}^{k}p^m(1-p)^k \sum_{i=1}^{k}\E\left[Z_i\right]\right) =\\&= \sum_{k\in \mathbb{N}\cup\{0\}}C_{m+k-1}^{k}p^m(1-p)^k k\E\left[Z\right] = \E\left[Z\right] \E\left[N_2\right] =\\&= \frac{9/4 \cdot x_0}{5/4} \cdot \frac{1}{0.9} = \frac{9 \cdot 10}{5\cdot 9}\cdot x_0 = 2x_0,\\
+                \var S_2^{col}           &= \E\left[N_2\right]\var Z = \frac{1}{0.9} \frac{x_0^2} \cdot 9/4{(5/4)^2\cdot 1/4} = \frac{10\cdot 9}{9 \cdot (5/4)^2}x_0^2 = 6.4 x_0^2, \\
+                \cv  S_2^{col}           &= \frac{\sqrt{6.4 x_0^2}}{2x_0} = \frac{\sqrt{6.4 x_0^2}}{2} = \sqrt{1.6} = \frac{4\sqrt{10}}{10}. 
+            \end{align*}
+    \problem{}
+        Пусть $V_i$ имеет распределение $\Gamma(\alpha_i, \beta)$, $i=1,\dots, n$ с плотностью
+        \begin{equation*}
+            f_{V_i}(x) = \frac{\beta^{\alpha_i}x^{\alpha_i-1}}{\Gamma(\alpha_i)}e^{-\beta x}\1(x\geq 0).
+        \end{equation*} 
+        Величины $(V_i)_{i=1,\dots,n}$ независимы. Используя преобразование Лапласа показать, что $S^{ind} = \sum_{i=1}^{n} V_i$ имеет распределение $\Gamma(\sum_{i=1}^n \alpha_i, \beta)$.
+
+    \solution{}
+        Знаем, что у $X \sim \Gamma(\alpha, \beta)$
+        \begin{equation*}
+            \MGF_{X}(\lambda) = \left(1-\frac{\lambda}{\beta}\right)^{-\alpha}.
+        \end{equation*}
+        Итого имеем:
+        \begin{multline*}
+            \MGF_{S^{ind}}(\lambda) = \MGF_{\sum_{i=1}^{n} V_i}(\lambda) \overset{\text{в силу независимости}}{=\!=\!=\!=} \prod_{i=1}^n \MGF_{V_i}(\lambda) = \\ = \prod_{i=1}^n \left(1-\frac{\lambda}{\beta}\right)^{-\alpha_i} = \left(1-\frac{\lambda}{\beta}\right)^{-\sum_{i=1}^n \alpha_i}  = \MGF_{\Gamma(\sum_{i=1}^n \alpha_i, \beta)}(\lambda).
+        \end{multline*}
+            

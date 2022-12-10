@@ -1,0 +1,76 @@
+\chapter{Суммарный размер ущерба. Динамические модели. Модель Крамера - Лундберга и вероятность разорения}
+    \problem{}
+        Показать, что логарифмически нормальное распределение масштабно инвариантно, но не обладает масштабным параметром.
+    \solution{}
+        \begin{definition}[Масштабно инвариантное семейство]
+            Семейство распределений называется масштабно инвариантным, если вместе с распределением случайной величины $X$ распределение $Y=cX \quad \forall c \in \mathbb{R^+}$ также принадлежит этому семейству.  
+        \end{definition}
+        $X\sim LN(a, \sigma^2)$, т.е. $\exists Y \sim N(a, \sigma^2)\colon \ X = \exp \left\{ Y \right\}$.
+        Посмотрим, какое распределение у $cX$:
+        \begin{equation*}
+            cX = c\exp\left\{Y\right\} = \exp\left\{Y + \log c\right\},
+        \end{equation*}
+        т.е. $cX \sim LN(a+\log c, \sigma^2)$.
+
+    \problem{}
+        Доказать, что пуассоновское распределение $Pois(\lambda)$ получается из отрицательно биномиального распределения $NB(\alpha, \beta)$, если положить $\lambda = \alpha(1 - \beta)$ и $ \beta \to 1$.
+    \solution{}
+        \begin{definition}
+            [Отрицательное биномиальное распределение $NB(m, p)$]
+                \begin{equation*}
+                        \P(X = k) =\tbinom{m+k-1}{k} p^m(1-p)^k \iff \MGF_X(t) = \left(\frac{1-p}{1-pe^t}\right)^m.
+                \end{equation*}
+        \end{definition}
+        Пусть $X\sim NB(\alpha, \beta), \alpha\beta=:\lambda$. Найдем предельную $MGF$ при $\beta\to 0$:
+        \begin{multline*}
+            \lim_{\beta\to 0}\MGF_X(t) = \lim_{\beta\to 0} \left(\frac{1-\beta}{1-\beta e^t}\right)^\alpha = \\ =
+            \lim_{s\to 0}  \left(\frac{1-s}{1-se^t}\right)^{\lambda / s} = 
+            \lim_{s\to 0}  \left(\frac{1-se^t}{1-s}\right)^{-\lambda / s} \overset{\text{из 2 зам.пр.}}{=\!=\!=\!=\!=\!=} e^{\lambda \left( e^{t}-1 \right) } = \MGF_{Pois(\lambda)}(t).
+        \end{multline*} 
+        По теореме о характеризации получаем, что предельное распределение пуассоновское ($\MGF \leftrightarrow \law$).
+
+    \problem{}
+        Все ли распределения класса $(a, b, 0)$ являются безгранично делимыми?
+    \solution{}
+        \begin{definition}
+            Считающее распределение принадлежит классу $(a, b, 0)$, если 
+            \begin{equation*}
+                p_k = p_{k-1}\left( a+\frac{b}{k} \right).
+            \end{equation*}
+            При этом $p_0 = 1-\sum_{k = 1}^\infty p_k$
+        \end{definition}
+        Знаем, что только $Pois, B, NB, Geom$\footnote{$Geom$ частный случай $NB$} принадлежат этому классу.
+        \begin{definition}
+            Случайная  величина $Y$ (ее распределение) называется бесконечно делимой (-ым), если для любого $n \in \mathbb{N}$ она может быть представлена в виде $Y = \sum_{i=1}^n X^{(n)}_i$, где  $(X_i^{(n)})_{i=1\dots n}$ -- независимые одинаково распределённые случайные величины.
+        \end{definition}
+        \begin{itemize}
+            \item $Pois(\lambda)$: берем $n$ н.о.р. $Pois(\lambda/n)$ случайных величин;
+            \item $B(m, p)$ \begin{equation*}
+                \MGF_{B(m, p)} = \left(1-p + pe^t\right)^m = \left(\left(\sqrt[n]{1-p + pe^t}\right)^m\right)^n;
+            \end{equation*}
+            \item $NB(m, p)$ \begin{equation*}
+                \MGF_{NB(m, p)} = \left(\frac{1-p}{1-pe^t}\right)^m = \left(\left(\sqrt[n]{\frac{1-p}{1-pe^t}}\right)^m\right)^n.
+            \end{equation*}
+        \end{itemize}
+    \problem{}
+        Выписать явный вид $(p^T_k)_{k\geq 1}$ для урезанных в нуле распределения из класса $(a, b, 0)$.
+    \solution{}
+        $p^T_k = \frac{p_k}{(1 -p_0)}$. Далее $k\geq 1$.
+        \begin{itemize}
+            \item $TB(n, p)$
+            \begin{equation*}
+                p_k^T = \binom{n}{k} \frac{p^k(1-p)^{n-k}}{1 - (1-p)^n};
+            \end{equation*}
+            \item $TPois(\lambda)$
+            \begin{equation*}
+                p^T_k = \frac{1}{k!} \frac{\lambda ^ k }{e^\lambda - 1};
+            \end{equation*}
+            \item $TNB(\alpha, \beta)$
+            \begin{equation*}
+                p_k^T = \tbinom{k + \alpha - 1}{k}\frac{\beta^{k}}{(1+\beta)^{\alpha+k} - (1+\beta)^k};
+            \end{equation*}
+            \item $TGeom(\beta)$
+            \begin{equation*}
+                p_k^T = \frac{\beta^{k - 1}}{(1 + \beta)^k}.
+            \end{equation*}
+        \end{itemize}
