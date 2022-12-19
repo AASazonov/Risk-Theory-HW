@@ -1,0 +1,62 @@
+\chapter{Апостериорная тарификация. Теория ограниченных флуктуаций. Модель Бюлмана.}
+
+    \problem{}
+    Найти наилучшее приближение $X_{t+1}$ c помощью неоднородной линейной комбинации $X_1,\dots, X_t$. 
+    
+    \solution{}
+        Ищем оценку в следующем виде:
+        \begin{align}
+            & \hat X_{t+1} = \beta \cdot \mathbb{X}_t, \quad \mathbb{X}_t = \left[1, X_1, X_2, \dots, X_t\right]^T, \quad \beta = [\beta_0, \dots, \beta_t], \\
+            & \forall s = 0, \dots, t \quad \cov\left[X_{t+1} - \hat X_{t+1}, X_s\right] = 0
+        \end{align}
+        Очевидно, что из $X_0 = 1$ следует несмещенность оценки и выражение $\beta_0$ через другие коэффициенты:
+        \begin{equation}
+            \beta_0 = \left(1 - \sum_{s = 1}^t \beta_s\right)m.
+        \end{equation}
+        В частности, \begin{equation}
+            0 = \cov\left[X_{t+1} - \hat X_{t+1}, X_s\right] = \E\left[\left(X_{t+1} - \hat X_{t+1}\right) X_s\right].
+        \end{equation}
+        Итого, 
+        \begin{multline}
+            \cov\left[X_{t+1} - \hat X_{t+1}, X_s\right] = \cov\left[X_{t+1}, X_s\right] - \sum_{u = 0}^t\beta_u\cov\left[X_{u}, X_s\right] =\\=
+            a - \sum_{u = 1, u \neq s}^t\beta_ua - \beta_s(a+s^2) = 0,
+        \end{multline}
+        откуда имеем
+        \begin{equation}
+            \forall i = 1, \dots, t\quad  \beta_is^2 = a\left(1 - \sum_{s = 1}^t \beta_s\right) \implies \forall i = 1, \dots, t\quad  \beta_i = \frac{a}{at + s^2}.
+        \end{equation}
+
+    \problem{}
+    Найти наилучшее приближение $\mu(\Theta)$ c помощью однородной линейной комбинации $X_1,\dots,X_t$. 
+    
+    \solution{}
+        Ищем оценку в следующем виде:
+        \begin{align}
+            & \hat \mu = \beta \cdot \mathbb{X}_t, \quad \mathbb{X}_t = \left[X_1, X_2, \dots, X_t\right]^T, \quad \beta = [\beta_1, \dots, \beta_t], \\
+            & \forall s = 0, \dots, t \quad \cov\left[X_{t+1} - \hat X_{t+1}, X_s\right] = 0.
+        \end{align}
+        \begin{multline}
+            \E\left[\left(\mu(\theta) -\hat \mu\right)X_s\right] = \cov\left[\mu(\theta) -\hat \mu, X_s\right] = 
+            \cov\left[\mu(\theta), X_s\right] - \cov\left[\hat \mu, X_s\right] = \\=
+            \cov\left[\mu(\theta), X_s\right] - \sum_{u = 1}^t\beta_u\cov\left[X_u, X_s\right] + \E[X_s]\left(\E\left[\mu(\theta)\right] - \sum_{u=1}^{t}\beta_u\E\left[X_u\right]\right) = \\ =
+            a - \sum_{u=1}^{t}\beta_ua - \beta_ss^2 +m^2\left(1 - \sum_{u=1}^{t}\beta_u\right) =0
+        \end{multline}
+        Итого,
+        \begin{equation}
+            \beta_{...} = \frac{a+m^2}{(a+m^2)t + s^2} 
+        \end{equation}
+
+    \problem{}
+    Проверить, пользуясь тем, что $X_{t+1}$ и  $X_1,\dots,X_t$ условно независимы при данной $\Theta$,   равенство 
+    $$ E(X_{t+1}|X_1,\dots,X_t)=E(\mu(\Theta)|X_1,\dots,X_t).$$ 
+    
+    \solution{}
+        $\mu(\Theta) := \E\left[X_i\vert \Theta\right]$. Знаем, что
+        \begin{equation}
+            \E\left[X_{t+1} \vert X_1, \dots, X_t, \Theta\right] = \E\left[X_{t+1} \vert \Theta\right] = \mu(\Theta).
+        \end{equation}
+        Имеем
+        \begin{multline}
+            \E\left[\mu(\Theta)\vert X_1,\dots, X_t\right] = \E\left[ \E\left[X_{t+1} \vert \Theta\right]\vert X_1,\dots, X_t\right] = \\= 
+            \E\left[ \E\left[X_{t+1} \vert X_1, \dots, X_t, \Theta\right] \vert X_1,\dots, X_t\right] \overset{\text{iterated expectations}}{=}  \E\left[X_{t+1}  \vert X_1,\dots, X_t\right]
+        \end{multline}
