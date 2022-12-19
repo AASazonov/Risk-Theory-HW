@@ -9,13 +9,35 @@
 \end{enumerate} 
 
 \solution{}
+\partsol{}
+$\mu(\Theta_k) = \E\left[X\vert\Theta_k\right]$. Отсюда получаем
+\begin{multline}
+    \cov\left[\mu(\Theta_k), X_{pl}\right] = \E\left[\left(\mu(\Theta_k)-\E[\mu(\Theta_k)]\right)\left(X_{pl}-\E\left[X_{pl}\right]\right)\vert\Theta_k\right] = \\ = 
+    \E\left[(\mu(\Theta_k) - m)\E\left[X_{pl} - m\vert\Theta_k\right]\right]
+\end{multline}
+Рассмотрим $p = k$.
+\begin{equation}
+    \E\left[X_{pl}-m\vert\Theta_k\right] = \E\left[X_{kl}-m\vert\Theta_k\right] =\mu(\Theta_k) - m.
+\end{equation}
+\begin{multline}
+    \cov\left[\mu(\Theta_k), X_{pl}\right] = \E\left[(\mu(\Theta_k) - m)(X_{pl} - m)\vert\Theta_k\right] =\\= \E\left[(\mu(\Theta_k) - m)^2\right] = \var \mu(\Theta_k) = a.
+\end{multline}
+При $p\neq k \quad X_{pl}\independent \Theta_k$. Поэтому
+\begin{multline}
+    \E\left[X_{pl}-m \vert \Theta_k\right] = \E\left[X_{pl} - m\right] = 0\implies
+    \cov\left[\mu(\Theta_k), X_{pl}\right] = \\=\E\left[(\mu(\Theta_k) - m)(X_{pl} - m)\right] = \E\left[\mu(\Theta_k) - m\right] \E\left[X_{pl} - m\right]  = 0
+\end{multline}
+Получили первое утверждение. 
 
+\partsol{}
+При $p \neq k$ величины независимы, т.е. их ковариация равна нулю. Поэтому рассмотрим $p = k$.
+\begin{multline}
+    \cov\left[X_{ki}, X_{pl}\right] =\cov\left[X_{ki}, X_{kl}\right] = \E\left[\E\left[(X_{ki} - m)(X_{kl} - m)|\Theta_k\right]\right] = \\= 
+    \E\left[\E\left[(X_{ki} -\mu(\Theta_k)+\mu(\Theta_k)- m)(X_{kl}-\mu(\Theta_k)+\mu(\Theta_k) - m)\vert \Theta_k\right]\right] = \\ = (a+\delta_{il}s^2)\delta_{kp}
+\end{multline}
 
-
-
-
-
-
+\partsol{}
+Ровно так же как и в пункте {\bf(b)}.
 
 
 \problem{}
@@ -29,3 +51,30 @@
 \item $\cov(X_{..}^W,X_{..}^W)=\frac{s^2}{W_{..}}+a\sum_{k=1}^n(\frac{W_{k.}}{W_{..}})^2.$ 
 \end{enumerate}
 \solution{}
+\partsol{}
+Следует из п. {\bf(a)} предыдущей задачи.
+
+\partsol{}
+При $p\neq k$ величины независимы, т.е. их ковариация равна нулю. Поэтому рассмотрим $p = k$.
+\begin{multline}
+    \cov\left[X_{ki}, X_{pj}\right] =\cov\left[X_{ki}, X_{kj}\right] =\\= \E\left[\cov[X_{ki}, X_{kj}\vert \Theta_k]\right] + \cov\left[\E\left[X_{ki}\vert \Theta_k\right], \E\left[X_{kj}\vert \Theta_k\right]\right] =\\=
+    \delta_{ij}\frac{s^2}{W_{ki}}+a
+\end{multline}
+
+\partsol{}
+ b
+
+\partsol{}
+\begin{equation}
+    \cov\left[X_{ki}, X_{..}^W\right] = \frac{W_{k.}}{W_{..}}\cov\left[X_{ki}, X_{k.}^W\right] =   \frac{W_{k.}}{W_{..}}\left(a+\frac{s^2}{W_{k.}}\right)
+\end{equation}
+
+\partsol{}Аналогично предыдущей части,
+\begin{equation}
+    \cov\left[X_{k.}^W, X_{..}^W\right] = \frac{W_{k.}}{W_{..}}\cov\left[X_{k.}^W, X_{k.}^W\right] =   \frac{W_{k.}}{W_{..}}\left(a+\frac{s^2}{W_{k.}}\right)
+\end{equation}
+
+\partsol{}
+\begin{multline}
+    \cov\left[X_{..}^W, X_{..}^W\right] = \sum_{k=1}^n\frac{W_{k.}}{W_{..}}\cov\left[X_{k.}^W, X_{k.}^W\right] =\\= \sum_{k=1}^n\frac{W_{k.}}{W_{..}}\left(a+\frac{s^2}{W_{k.}}\right) = \frac{s^2}{W_{..}}+a\sum_{k=1}^n\left(\frac{W_{k.}}{W_{..}}\right)^2.
+\end{multline}
