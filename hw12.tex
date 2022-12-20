@@ -45,7 +45,7 @@ $\mu(\Theta_k) = \E\left[X\vert\Theta_k\right]$. Отсюда получаем
 \begin{enumerate}
 \item $\cov(\mu(\Theta_k),X_{pi})=a\delta_{kp},$ 
 \item $\cov(X_{ki},X_{pj})=(a+\delta_{ij}\frac{s^2}{W_{ki}})\delta_{kp},$ 
-\item $\cov(X_{ki},X_{k.}^W)=cov(X_{k.}^W,X_{k.}^W)=a+\frac{s^2}{W_{k.}},$ 
+\item $\cov(X_{ki},X_{k.}^W)=\cov(X_{k.}^W,X_{k.}^W)=a+\frac{s^2}{W_{k.}},$ 
 \item $\cov(X_{ki},X_{..}^W)=\frac{s^2}{W_{..}}+a\frac{W_{k.}}{W_{..}},$ 
 \item $\cov(X_{k.}^W,X_{..}^W)=\frac{s^2}{W_{..}}+a\frac{W_{k.}}{W_{..}},$ 
 \item $\cov(X_{..}^W,X_{..}^W)=\frac{s^2}{W_{..}}+a\sum_{k=1}^n(\frac{W_{k.}}{W_{..}})^2.$ 
@@ -62,7 +62,20 @@ $\mu(\Theta_k) = \E\left[X\vert\Theta_k\right]$. Отсюда получаем
 \end{multline}
 
 \partsol{}
- b
+\begin{align}
+    \cov\left[X_{ki},X_{k.}^W\right] & = \E\left[\cov\left[X_{ki},\frac{W_{ki}}{W_{k.}}X_{ki}^W\vert \Theta_k\right]\right] + \cov\left[\E[X_{ki}\vert \Theta_k],\E[X_{k.}^W\vert\Theta_k]\right] =\nonumber\\
+                                     & = \frac{W_{ki}}{W_{k.}} \E\left[\frac{\sigma^2(\Theta_k)}{W_{ki}}\right] + \var\left[\mu(\Theta_k)\right] = a + \frac{s^2}{W_{k.}}
+\end{align}
+Заметим, что 
+\begin{equation}
+    \cov\left[X_{ki},X_{k.}^W\right] = \E\left[\cov\left[X_{ki},X_{k.}^W\vert \Theta_k\right]\right] + \cov\left[\E[X_{ki}\vert \Theta_k],\E[X_{k.}^W\vert\Theta_k]\right].
+\end{equation}
+Докажем второе утверждение из пункта:
+\begin{multline}
+    \cov\left[X_{k.}^W,X_{k.}^W\right] = \E\left[\var\left[X_{k.}^W\vert \Theta_k\right]\right] + \var\left[\E\left[X_{k.}^W\vert \Theta_k\right]\right] =\\=
+    \E\left[\sum_{i=1}^t\left(\frac{W_{ki}}{W_{k.}}\right)^2 \frac{\sigma^2(\Theta_k)}{W_{ki}}\var\left[X_{k.}^W\vert \Theta_k\right]\right] +\var\left[\mu(\Theta_k)\right] =\\=
+    a + \sum_{i=1}^t\frac{s^2}{W_{k.}}W_{ki} =a + \frac{s^2}{W_{k.}}.
+\end{multline}
 
 \partsol{}
 \begin{equation}
